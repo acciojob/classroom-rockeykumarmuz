@@ -78,11 +78,9 @@ public class StudentRepositry {
     }
 
     public void deleteAllTeachers() {
-        for(String k: teacherDb.keySet()) {
-            teacherDb.remove(k);
-        }
 
         for(String k: studentTeacherDb.keySet()) {
+            teacherDb.remove(k);
             List<String> al = studentTeacherDb.remove(k);
             for(String p: al) {
                 if(studentDb.containsKey(p)) {
