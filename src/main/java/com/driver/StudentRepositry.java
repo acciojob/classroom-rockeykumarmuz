@@ -10,10 +10,9 @@ public class StudentRepositry {
     HashMap<String, Teacher> teacherDb= new HashMap<>();
     HashMap<String, List<String>> studentTeacherDb= new HashMap<>();
 
-    public String addStudent(Student student) {
-
+    public void addStudent(Student student) {
         studentDb.put(student.getName(), student);
-        return "added successfully";
+
     }
 
     public void addTeacher(Teacher teacher) {
@@ -70,7 +69,12 @@ public class StudentRepositry {
 
     public void deleteTeacherByName(String teacher) {
         teacherDb.remove(teacher);
-        studentTeacherDb.remove(teacher);
+
+        List<String> al = studentTeacherDb.remove(teacher);
+        for(int i=0; i<al.size(); i++) {
+            String temp = al.get(i);
+            studentDb.remove(temp);
+        }
     }
 
     public void deleteAllTeachers() {
@@ -79,7 +83,12 @@ public class StudentRepositry {
         }
 
         for(String k: studentTeacherDb.keySet()) {
-            studentTeacherDb.remove(k);
+            List<String> al = studentTeacherDb.remove(k);
+            for(String p: al) {
+                if(studentDb.containsKey(p)) {
+                    studentDb.remove(p);
+                }
+            }
         }
     }
 }

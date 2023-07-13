@@ -6,9 +6,8 @@ public class StudentService {
 
     StudentRepositry studentRepositry= new StudentRepositry();
 
-    public String addStudent(Student student) {
-        String ans = studentRepositry.addStudent(student);
-        return ans;
+    public  void addStudent(Student student) {
+        studentRepositry.addStudent(student);
     }
 
     public void addTeacher(Teacher teacher) {
